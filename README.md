@@ -65,3 +65,11 @@
 **Visualization and Reporting:**
 
 - Create clear, informative visualizations and reports to communicate your EDA results to stakeholders or team members.
+
+# Changes on the Dataset 
+
+| Featuename | Action | Reason |
+|---|---|---|
+| Dachmaterial  |  delete | coralation: 0.025 and 1973 times same value |
+|   |   |   |
+|   |   |   |
