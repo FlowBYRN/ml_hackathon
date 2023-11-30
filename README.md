@@ -76,7 +76,7 @@
 | Kellerbereichgroesse2 | delete||
 | Mauerwerktyp | change | missing values to "Kein" |
 | Mauerwerkfläche |change| missing values to 0 |
-|  |  |  |
+| Poolqualität und Poolfläche | reduce | mit PCA auf eine Dimension |
 |  |  |  |
 |  |  |  |
 |  |  |  |
