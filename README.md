@@ -82,3 +82,15 @@
 | Elektrik                                                                                                                                   | change | missing values to mode                                      |
 | GeringequalitaetFlaeche                                                                                                                    | delete | because only 29 rows not 0                                  |
 | OffeneVerandaflaeche/ GeschlosseneVerandaflaeche                                                                                           | change | aggregate columns and check correlation with price/holzdeck |
+| Featuename | Action | Reason |
+| Dachmaterial  |  delete | coralation: 0.025 and 1973 times same value |
+| Kellerhöhe, Kellerzustand, Kellerbelichtung, Kellerbereich1, Kellerbereich2  |  change |  missing values to NA |
+|  Kellerbereichgroesse1, Kellerbereichgroesse2, KellerbereichgroesseGes, KellerbereichgroesseNau, KellerVollbadezimmer, KellerHalbbadezimmer | change  | missing values to 0.0  |
+| Kellerbereichgroesse2 | delete||
+| Mauerwerktyp | change | missing values to "Kein" |
+| Mauerwerkfläche |change| missing values to 0 |
+| Poolqualität und Poolfläche | reduce | mit PCA auf eine Dimension |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
