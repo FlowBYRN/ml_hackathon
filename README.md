@@ -71,5 +71,13 @@
 | Featuename | Action | Reason |
 |---|---|---|
 | Dachmaterial  |  delete | coralation: 0.025 and 1973 times same value |
-|   |   |   |
-|   |   |   |
+| Kellerhöhe,Kellerzustand,Kellerbelichtung, Kellerbereich1, Kellerbereich2  |  change |  missing values to NA |
+|  Kellerbereichgroesse1,Kellerbereichgroesse2,KellerbereichgroesseGes,KellerbereichgroesseNau,KellerVollbadezimmer,KellerHalbbadezimmer | change  | missing values to 0.0  |
+|Kellerbereichgroesse2|delete||
+|Mauerwerktyp|change|missing values to "Kein"|
+|Mauerwerkfläche|change| missing values to 0|
+||||
+||||
+||||
+||||
+||||
