@@ -1,0 +1,64 @@
+## Hackathon – Model Submission
+Team: Hutchin_Kvindt_Neckel_Weidner
+
+Dieses notebook ist die finale Abgabe für das Hackathon. Es enthält den Code zum Trainieren des Modells und zum Erstellen von Vorhersagen auf dem Testset.
+
+# Datenvorverarbeitung:
+Mit der Funktion "preprocessing" wurde die Datenvorverarbeitung vorgenommen.
+
+-- 1. Behandlung von fehlenden Werten:
+
+Verkaufspreis ist eine Schlüsselvariable. Wenn sie vorhanden ist, werden geringfügig fehlende Werte in einigen Schlüsselattributen gelöscht.
+
+Fehlende Werte in Strassenlaenge werden mithilfe einer linearen Regression auf Basis des Verkaufspreises geschätzt.
+Falls Verkaufspreis nicht vorhanden ist, werden die fehlenden Werte in Strassenlaenge durch den Modus ersetzt.
+Bei kategorischen Attributen der Features 'Wohngebiet', 'Funktionalitaet', 'KuechenQualitaet', 'Elektrik', 'Verkaufstyp', 'Garagenflaeche', 'Garagenautos' wird der Modus als Ersatz für fehlende Werte verwendet.
+
+Einige numerische und kategorische Features werden unterschiedlich behandelt, wobei fehlende Werte:
+ – durch den Modus ('Funktionalitaet', 'KuechenQualitaet', 'Elektrik', 'Garagenbaujahr', 'Garageninnenausbau', 'Garagentyp'),
+ - durch 'NA' ('Kellerhoehe', 'Kellerzustand', 'Kellerbelichtung', 'Kellerbereich1', 'Kellerbereich2', 'Kaminqualitaet', 'Zaunqualitaet'),
+ - oder durch 0 ('Kellerbereichgroesse1', 'Kellerbereichgroesse2', 'KellerbereichgroesseGes', 'KellerbereichgroesseNAu', 'KellerVollbadezimmer', 'KellerHalbbadezimmer', 'Mauerwerkflaeche') ersetzt werden.
+
+-- 2. Bereinigung von Features:
+
+Einige Features werden aufgrund ihrer geringen Informationsgehalt oder Verteilung von Werten gelöscht.
+Dies betrifft Features mit vielen fehlenden Werten: 'Versorgung', 'Kellerbereichgroesse2', 'GeringequalitaetFlaeche', 'Zufahrtsweg', 'Sondermerkmal', 'Poolqualitaet', 'Garagenqualitaet', 'Garagenzustand'
+
+Einschränkungen werden für bestimmte numerische Werte eingeführt, wie z.B. Grundstuecksgroesse und Strassenlaenge.
+Außerdem werden einige Datensätze entfernt, wenn das Umbaujahr größer als das Baujahr ist oder das Garagenbaujahr größer als 2023 ist.
+Das Feature Bedingung1 wird umkodiert, um ähnliche Werte zu konsolidieren.
+
+Einige Features, wie Grundstuecksform, Gelaendeneigung, Strassentyp, Dachmeterial, werden aufgrund ihrer schlechten Verteilung von Werten entfernt.
+
+-- 3. Ergebnis:
+
+Die Funktion gibt den bereinigten Datensatz zurück und gibt abschließend Informationen über die Anzahl der entfernten Instanzen, die verbleibende Anzahl von Exemplaren und Merkmalen aus.
+Es wurden von 80 ursprünglichen Features 67 beibehalten und 1986 von ursprünglich 2000 Instanzen beibehalten.
+
+Um ein einheitliches Datenformat mit den Testdaten zu gewährleisten, wurden diese ebenso mit preprocess vorverarbeitet.
+Abschließend wurden die gesamten Daten mit LabelEncoder kodiert, mit StandardScaler normaliziert und in die respektiven Trainings- und Testdaten aufgeteilt.
+
+# Modell:
+Als Modell wird ein Support Vector Regression aus sci-kit learn verwendet. Die Hyperparameter wurden mit RandomizedSearchCV optimiert.
+
+-- 1. Initialisierung des Modells:
+
+Es wird ein Support Vector Regressor-Modell (SVR()) initialisiert. Dieses Modell wird für die Vorhersage von kontinuierlichen Werten verwendet.
+
+-- 2. Anpassen des Modells:
+
+Das SVR-Modell wird mit Trainingsdaten (X_train, y_train) angepasst. Hierbei werden die Eingangsdaten X_train und die zugehörigen Zielwerte y_train verwendet, um das Modell zu trainieren.
+
+-- 3. Vorhersagen treffen:
+
+Das trainierte Modell wird verwendet, um Vorhersagen für die Testdaten (X_test) zu treffen. Die resultierenden Vorhersagen werden in der Variable y_pred gespeichert.
+
+-- 4. Evaluierung des Modells:
+
+Der R^2-Score (Koeffizient der Bestimmtheit) wird berechnet, um die Qualität der Vorhersagen im Vergleich zu den tatsächlichen Werten zu bewerten. Ein höherer R^2-Score deutet auf eine bessere Modellanpassung hin.
+Der mittlere quadratische Fehler (Mean Squared Error, MSE) wird berechnet, um die durchschnittliche quadratische Abweichung zwischen den Vorhersagen und den tatsächlichen Werten zu messen.
+
+-- 5. Ergebnis:
+
+Um die normalisierten Werte aus den Vorhersagen in die ursprünglichen Maßeinheiten zurückzusetzen, wird die inverse Transformation (inverse_transform) mit einem Scaler (sc_y) durchgeführt.
+Nach der Rücktransformation werden die unnormalisierten Vorhersagen in das CSV-Dateiformat überführt und in einer Datei mit dem Namen "prediction_avg.csv" gespeichert
